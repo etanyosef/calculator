@@ -1,0 +1,40 @@
+* {
+    box-sizing: content-box;
+}
+
+h1 {
+    margin-top: .1em;
+}
+
+.calc-screen {
+    height: 3em;
+    background-color: gray;
+    margin-bottom: 10px;
+}
+
+.calculator {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.calc-keys {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.key-rows {
+    width: 100%;
+}
+
+.key-rows div {
+    width: 100%;
+}
+
+.operator-keys {
+    display: flex;
+    flex-direction: column;
+}

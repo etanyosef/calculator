@@ -14,37 +14,39 @@
         </header>
 
         <main>
-            <div class="calc-screen"></div>
+            <input type="text" class="calc-mini-screen" disabled>
+            <input type="text" class="calc-screen" disabled>
 
             <div class="calc-keys">
-                <div>
-                    <div class="key-rows">
-                        <button class="num-key">7</button>
-                        <button class="num-key">8</button>
-                        <button class="num-key">9</button>
-                    </div>
-                    <div class="key-rows">
-                        <button class="num-key">4</button>
-                        <button class="num-key">5</button>
-                        <button class="num-key">6</button>
-                    </div>
-                    <div class="key-rows">
-                        <button class="num-key">1</button>
-                        <button class="num-key">2</button>
-                        <button class="num-key">3</button>
-                    </div>
-                    <div class="key-rows">
-                        <button class="num-key">0</button>
-                        <button class="num-key">.</button>
-                        <button class="num-key">=</button>
-                    </div>
+                <div class="key-rows">
+                    <button class="hidden"></button>
+                    <button class="clear-all">CE</button>
+                    <button class="clear-entry">C</button>
+                    <button>&#8592;</button>
                 </div>
-                
-                <div class="operator-keys">
-                    <button>%</button>
-                    <button>*</button>
-                    <button>-</button>
-                    <button>+</button>
+                <div class="key-rows">
+                    <button class="num-key calc-key">7</button>
+                    <button class="num-key calc-key">8</button>
+                    <button class="num-key calc-key">9</button>
+                    <button class="operator-key calc-key">%</button>
+                </div>
+                <div class="key-rows">
+                    <button class="num-key calc-key">4</button>
+                    <button class="num-key calc-key">5</button>
+                    <button class="num-key calc-key">6</button>
+                    <button class="operator-key calc-key">*</button>
+                </div>
+                <div class="key-rows">
+                    <button class="num-key calc-key">1</button>
+                    <button class="num-key calc-key">2</button>
+                    <button class="num-key calc-key">3</button>
+                    <button class="operator-key calc-key">-</button>
+                </div>
+                <div class="key-rows">
+                    <button class="num-key calc-key">0</button>
+                    <button class="num-key calc-key">.</button>
+                    <button class="equals-key calc-key">=</button>
+                    <button class="operator-key calc-key">+</button>
                 </div>
             </div>
         </main>

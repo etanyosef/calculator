@@ -34,8 +34,8 @@ function operate(num1, num2, operator) {
 
 let calcScreen = document.querySelector('.calc-screen');
 let calcMiniScreen = document.querySelector('.calc-mini-screen');
-let num1 = '';
-let num2 = '';
+let num1 = 0;
+let num2 = 0;
 let operator;
 
 const clearAll = document.querySelector('.clear-all');
@@ -57,21 +57,41 @@ numKey.forEach( (key) => {
 let operatorKey = document.querySelectorAll('.operator-key');
 operatorKey.forEach( (key) => {
     key.addEventListener('click', () => {
-        
-        if(!(calcMiniScreen.value === '') && !(calcScreen.value === '')) {
-            
-            num2 = calcScreen.value;
-            
-            let result = operate(parseInt(num1), parseInt(num2), operator);
+
+        if (!(calcMiniScreen.value === '') && calcScreen.value === '') {
+            calcMiniScreen.value = `${num1} ${operator}`;
             operator = key.textContent;
+            return;
+        }
+
+        
+            // num1 = calcScreen.value;
+
+        // if screens are not empty
+        if( !(calcMiniScreen.value === '') && !(calcScreen.value === '') ) {
+            console.log(`${num1} ${operator} ${num2}`);
+            operator = key.textContent;
+            // num1 = calcScreen.value;
+            num2 = num1;
+            num1 = calcScreen.value;
+
+            let result = operate(parseInt(num1), parseInt(num2), operator);
             num1 = result;
+
             calcMiniScreen.value = `${result} ${operator}`;
+            num2 = 0;
+            // operator = '';
             calcScreen.value = '';
         } else {
-            num1 = calcScreen.value;
             operator = key.textContent;
-            calcMiniScreen.value += ` ${num1} ${operator}`;
-            calcScreen.value = "";
+            
+            if(calcScreen.value === '') {
+                num1 = 0;
+            } else {                
+                num1 = calcScreen.value;
+                calcMiniScreen.value += ` ${num1} ${operator}`;
+                calcScreen.value = "";
+            }
         }
 
     });
@@ -80,13 +100,21 @@ operatorKey.forEach( (key) => {
 let equalsKey = document.querySelector('.equals-key');
 equalsKey.addEventListener('click', () => {
     // do nothing if user click equals without 2nd number
-    if ( !(num1 === 0) && !(calcScreen.value === '') && !(calcMiniScreen.value === '') ) {
+    if ( !(calcScreen.value === '') && !(calcMiniScreen.value === '') ) {
         num2 = calcScreen.value;
-        calcScreen.value = operate(parseInt(num1), parseInt(num2), operator);
+        const result = operate(parseInt(num1), parseInt(num2), operator)
+        calcScreen.value = result;
         calcMiniScreen.value = `${num1} ${operator} ${num2} =`;
-        
-        num2 = num1;
+        num1 = result;
+        num2 = 0;
     } 
+
+    if (num1 === '0' && num2 === '0' && operator === '%') {
+        calcScreen.value = 'Error';
+        operator = '';
+        num1 = 0;
+        num2 = 0;
+    }
 
 });
 

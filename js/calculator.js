@@ -59,10 +59,9 @@ operatorKey.forEach( (key) => {
     key.addEventListener('click', () => {
         
         if(!(calcMiniScreen.value === '') && !(calcScreen.value === '')) {
-            // num1 = num2;
+            
             num2 = calcScreen.value;
             
-            console.log(`${num1} ${operator} ${num2}`);
             let result = operate(parseInt(num1), parseInt(num2), operator);
             operator = key.textContent;
             num1 = result;
@@ -73,8 +72,6 @@ operatorKey.forEach( (key) => {
             operator = key.textContent;
             calcMiniScreen.value += ` ${num1} ${operator}`;
             calcScreen.value = "";
-            // // num2 = calcScreen.value;
-            // console.log(`${num1} ${operator} ${num2}`);
         }
 
     });
@@ -87,10 +84,8 @@ equalsKey.addEventListener('click', () => {
         num2 = calcScreen.value;
         calcScreen.value = operate(parseInt(num1), parseInt(num2), operator);
         calcMiniScreen.value = `${num1} ${operator} ${num2} =`;
-        console.log(`${num1} ${operator} ${num2}`);
-        console.log(`num1 = ${num1}, num2 = ${num2}`);
+        
         num2 = num1;
-        num1 = 0;
     } 
 
 });

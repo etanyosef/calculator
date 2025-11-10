@@ -64,10 +64,10 @@ operatorKey.forEach( (key) => {
             
             console.log(`${num1} ${operator} ${num2}`);
             let result = operate(parseInt(num1), parseInt(num2), operator);
-            calcMiniScreen.value = `${result} ${operator}`;
-            num1 = result;
-            calcScreen.value = '';
             operator = key.textContent;
+            num1 = result;
+            calcMiniScreen.value = `${result} ${operator}`;
+            calcScreen.value = '';
         } else {
             num1 = calcScreen.value;
             operator = key.textContent;

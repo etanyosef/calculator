@@ -111,7 +111,8 @@ operatorKey.forEach( (key) => {
             // assign the main screen value to num2
             num2 = calcScreen.value;
             // calculate the result
-            const result = operate(parseInt(num1), parseInt(num2), operator);
+            const result = operate(parseFloat(num1), parseFloat(num2), operator);
+            // result = result.toFixed(2);     // round it to 2 decimal place
             // assign the result to num1
             num1 = result;
             // clear the num2
@@ -142,7 +143,8 @@ equalsKey.addEventListener('click', () => {
     if ( !(calcScreen.value === '') && !(calcMiniScreen.value === '') ) {
         // assign main screen to num2
         num2 = calcScreen.value;
-        const result = operate(parseFloat(num1), parseFloat(num2), operator)
+        const result = operate(parseFloat(num1), parseFloat(num2), operator);
+        // result = result.toFixed(2);     // round it to 2 decimal place
         calcScreen.value = result;
         calcMiniScreen.value = `${num1} ${operator} ${num2} = `;
         num1 = result;

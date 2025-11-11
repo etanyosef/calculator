@@ -97,6 +97,14 @@ operatorKey.forEach( (key) => {
             // return operator = '';
             return;
         }
+
+        // if the user already input the first number and operator then click the operator/other operator again
+        // update the mini screen with the new operator
+        if ( !(calcMiniScreen.value === '') && !(operator === '') && calcScreen.value === '' ) {
+            operator = key.textContent;
+            calcMiniScreen.value = `${num1} ${operator}`;
+            return;
+        }
         
 
         if ( !(num1 === 0) && (num2 === 0) && !(operator === '') && !(calcScreen.value === '') ) {
@@ -117,7 +125,7 @@ operatorKey.forEach( (key) => {
         } else {
             // assign main screen value to num1 when the top mini screen is empty
             num1 = calcScreen.value;
-
+            // clear the main screen
             calcScreen.value = '';
             operator = key.textContent;
             calcMiniScreen.value = `${num1} ${operator}`;
@@ -134,7 +142,7 @@ equalsKey.addEventListener('click', () => {
     if ( !(calcScreen.value === '') && !(calcMiniScreen.value === '') ) {
         // assign main screen to num2
         num2 = calcScreen.value;
-        const result = operate(parseInt(num1), parseInt(num2), operator)
+        const result = operate(parseFloat(num1), parseFloat(num2), operator)
         calcScreen.value = result;
         calcMiniScreen.value = `${num1} ${operator} ${num2} = `;
         num1 = result;

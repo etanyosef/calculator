@@ -50,6 +50,17 @@ clearAll.addEventListener('click', () => {
 let numKey = document.querySelectorAll('.num-key');
 numKey.forEach( (key) => {
     key.addEventListener('click', () => {
+        // if user click the decimal button while the screen is empty, display '0.'
+        if(calcScreen.value === '' && key.textContent === '.') {
+            return calcScreen.value = `${num1}.`;
+        }
+
+        let screen = calcScreen.value;
+        // do nothing when the user clicks the decimal button and it is already present on screen
+        if(screen.includes('.') && key.textContent === '.') {
+            return;
+        }
+
         calcScreen.value += key.textContent;
     });
 });
@@ -57,40 +68,6 @@ numKey.forEach( (key) => {
 let operatorKey = document.querySelectorAll('.operator-key');
 operatorKey.forEach( (key) => {
     key.addEventListener('click', () => {
-
-        // if (!(calcMiniScreen.value === '') && calcScreen.value === '') {
-        //     calcMiniScreen.value = `${num1} ${operator}`;
-        //     operator = key.textContent;
-        //     return;
-        // }
-        //     // num1 = calcScreen.value;
-
-        // // if screens are not empty
-        // if( !(calcMiniScreen.value === '') && !(calcScreen.value === '') ) {
-        //     console.log(`${num1} ${operator} ${num2}`);
-        //     operator = key.textContent;
-        //     // num1 = calcScreen.value;
-        //     num2 = num1;
-        //     num1 = calcScreen.value;
-
-        //     let result = operate(parseInt(num1), parseInt(num2), operator);
-        //     num1 = result;
-
-        //     calcMiniScreen.value = `${result} ${operator}`;
-        //     num2 = 0;
-        //     // operator = '';
-        //     calcScreen.value = '';
-        // } else {
-        //     operator = key.textContent;
-            
-        //     if(calcScreen.value === '') {
-        //         num1 = 0;
-        //     } else {                
-        //         num1 = calcScreen.value;
-        //         calcMiniScreen.value += ` ${num1} ${operator}`;
-        //         calcScreen.value = "";
-        //     }
-        // }
 
         // do nothing if both screens are empty while clicking the operator
         if (calcScreen.value === '' && calcMiniScreen.value === '') {
@@ -145,8 +122,6 @@ equalsKey.addEventListener('click', () => {
         let result = operate(parseFloat(num1), parseFloat(num2), operator);
 
         result = Math.round(result * 100) / 100; // round it to 2 decimal places
-
-        console.log(typeof(result));
         
         calcScreen.value = result;
         calcMiniScreen.value = `${num1} ${operator} ${num2} = `;

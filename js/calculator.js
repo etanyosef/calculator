@@ -38,14 +38,29 @@ let num1 = 0;
 let num2 = 0;
 let operator;
 
-const clearAll = document.querySelector('.clear-all');
-clearAll.addEventListener('click', () => {
+
+function clearAllScreen() {
     calcScreen.value = '';
     calcMiniScreen.value = '';
     num1 = 0;
     num2 = 0;
     operator = '';
+}
+
+const clearAll = document.querySelector('.clear-all');
+clearAll.addEventListener('click', clearAllScreen);
+
+
+const clearEntry = document.querySelector('.clear-entry');
+clearEntry.addEventListener('click', () => {
+    const miniScreen = calcMiniScreen.value
+    if (miniScreen.includes('=')) {
+        clearAllScreen();
+    } else {
+        calcScreen.value = '';
+    }
 });
+
 
 let numKey = document.querySelectorAll('.num-key');
 numKey.forEach( (key) => {

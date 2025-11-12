@@ -47,6 +47,12 @@ function clearAllScreen() {
     operator = '';
 }
 
+const backspace = document.querySelector('.backspace');
+backspace.addEventListener('click', () => {
+    let mainscreen = calcScreen.value;
+    calcScreen.value = mainscreen.slice(0, -1);
+});
+
 const clearAll = document.querySelector('.clear-all');
 clearAll.addEventListener('click', clearAllScreen);
 
@@ -54,6 +60,7 @@ clearAll.addEventListener('click', clearAllScreen);
 const clearEntry = document.querySelector('.clear-entry');
 clearEntry.addEventListener('click', () => {
     const miniScreen = calcMiniScreen.value
+    // if the mini screen has '=', clear all entry
     if (miniScreen.includes('=')) {
         clearAllScreen();
     } else {
@@ -102,6 +109,7 @@ operatorKey.forEach( (key) => {
         if ( !(num1 === 0) && (num2 === 0) && !(operator === '') && !(calcScreen.value === '') ) {
             // assign the main screen value to num2
             num2 = calcScreen.value;
+
             // calculate the result
             let result = operate(parseFloat(num1), parseFloat(num2), operator);
             result = Math.round(result * 100) / 100; // round result to 2 decimal place
@@ -130,10 +138,24 @@ operatorKey.forEach( (key) => {
 
 let equalsKey = document.querySelector('.equals-key');
 equalsKey.addEventListener('click', () => {
+
     // do nothing if user click equals without 2nd number
     if ( !(calcScreen.value === '') && !(calcMiniScreen.value === '') ) {
         // assign main screen to num2
         num2 = calcScreen.value;
+
+        if (num1 === '0' && num2 === '0' && operator === '%') {
+            operator = '';
+            num1 = 0;
+            num2 = 0;
+            return calcScreen.value = 'Error';
+        } else if ( operator === '%' && num2 === '0' ) {
+            operator = '';
+            num1 = 0;
+            num2 = 0;
+            return calcScreen.value = "Can't divide by 0";
+        }
+
         let result = operate(parseFloat(num1), parseFloat(num2), operator);
 
         result = Math.round(result * 100) / 100; // round it to 2 decimal places
@@ -144,13 +166,6 @@ equalsKey.addEventListener('click', () => {
         num2 = 0;
         operator = '';
     } 
-
-    if (num1 === '0' && num2 === '0' && operator === '%') {
-        calcScreen.value = 'Error';
-        operator = '';
-        num1 = 0;
-        num2 = 0;
-    }
 
 });
 

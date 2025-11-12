@@ -47,6 +47,24 @@ function clearAllScreen() {
     operator = '';
 }
 
+
+function numKeyPress() {
+    // get the button pressed
+    key = this;
+    // if user click the decimal button while the screen is empty, display '0.'
+    if(calcScreen.value === '' && key.textContent === '.') {
+        return calcScreen.value = `${num1}.`;
+    }
+    let screen = calcScreen.value;
+    // do nothing when the user clicks the decimal button and it is already present on screen
+    if(screen.includes('.') && key.textContent === '.') {
+        return;
+    }
+    calcScreen.value += key.textContent;
+    console.log(key);
+}
+
+
 const backspace = document.querySelector('.backspace');
 backspace.addEventListener('click', () => {
     let mainscreen = calcScreen.value;
@@ -71,20 +89,7 @@ clearEntry.addEventListener('click', () => {
 
 let numKey = document.querySelectorAll('.num-key');
 numKey.forEach( (key) => {
-    key.addEventListener('click', () => {
-        // if user click the decimal button while the screen is empty, display '0.'
-        if(calcScreen.value === '' && key.textContent === '.') {
-            return calcScreen.value = `${num1}.`;
-        }
-
-        let screen = calcScreen.value;
-        // do nothing when the user clicks the decimal button and it is already present on screen
-        if(screen.includes('.') && key.textContent === '.') {
-            return;
-        }
-
-        calcScreen.value += key.textContent;
-    });
+    key.addEventListener('click', numKeyPress);
 });
 
 let operatorKey = document.querySelectorAll('.operator-key');

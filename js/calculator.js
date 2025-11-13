@@ -52,37 +52,27 @@ function clearAllScreen() {
 document.addEventListener('keydown', (e) => {
     const numbers = '0123456789.'
     if (numbers.includes(e.key)) {
-        if (calcScreen.value.includes('.') && e.key === '.') {
-            return;
-        }
-
-        if (calcScreen.value === '' && e.key === '.') {
-            calcScreen.value = `0`;
-        }
-
-        calcScreen.value += e.key;
+        numKeyPress(e.key);
     }
 
     const operators = '+-*%';
     if(operators.includes(e.key)) {
-        
+
     }
 });
 
 
-function numKeyPress() {
-    // get the button pressed
-    key = this;
+function numKeyPress(k) {
     // if user click the decimal button while the screen is empty, display '0.'
-    if(calcScreen.value === '' && key.textContent === '.') {
+    if(calcScreen.value === '' && k === '.') {
         return calcScreen.value = `${num1}.`;
     }
     let screen = calcScreen.value;
     // do nothing when the user clicks the decimal button and it is already present on screen
-    if(screen.includes('.') && key.textContent === '.') {
+    if(screen.includes('.') && k === '.') {
         return;
     }
-    calcScreen.value += key.textContent;
+    calcScreen.value += k;
 }
 
 
@@ -110,7 +100,9 @@ clearEntry.addEventListener('click', () => {
 
 let numKey = document.querySelectorAll('.num-key');
 numKey.forEach( (key) => {
-    key.addEventListener('click', numKeyPress);
+    key.addEventListener('click', () => {
+        numKeyPress(key.textContent)
+    });
 });
 
 let operatorKey = document.querySelectorAll('.operator-key');
@@ -131,7 +123,6 @@ operatorKey.forEach( (key) => {
             return;
         }
         
-
         if ( !(num1 === 0) && (num2 === 0) && !(operator === '') && !(calcScreen.value === '') ) {
             // assign the main screen value to num2
             num2 = calcScreen.value;
@@ -155,9 +146,7 @@ operatorKey.forEach( (key) => {
             calcScreen.value = '';
             operator = key.textContent;
             calcMiniScreen.value = `${num1} ${operator}`;
-        }
-
-        
+        }  
 
     });
 });

@@ -48,6 +48,12 @@ function clearAllScreen() {
 }
 
 
+function erase() {
+    let mainscreen = calcScreen.value;
+    calcScreen.value = mainscreen.slice(0, -1);
+}
+
+
 // add event listener to the page and display key if its a number or .
 document.addEventListener('keydown', (e) => {
     const numbers = '0123456789.'
@@ -58,6 +64,10 @@ document.addEventListener('keydown', (e) => {
     const operators = '+-*%';
     if(operators.includes(e.key)) {
 
+    }
+
+    if(e.key === 'Backspace') {
+        erase();
     }
 });
 
@@ -78,8 +88,7 @@ function numKeyPress(k) {
 
 const backspace = document.querySelector('.backspace');
 backspace.addEventListener('click', () => {
-    let mainscreen = calcScreen.value;
-    calcScreen.value = mainscreen.slice(0, -1);
+    erase();
 });
 
 const clearAll = document.querySelector('.clear-all');

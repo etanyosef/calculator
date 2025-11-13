@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 h1 {
     margin-top: .1em;
 }
@@ -13,7 +17,7 @@ h1 {
 .screen-container {
     border-radius: 25px;
     padding: 2px;
-    background-color: green;
+    background-color: rgb(47, 153, 47);
     margin-bottom: 10px;
 }
 .screen-container input {

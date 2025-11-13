@@ -48,6 +48,28 @@ function clearAllScreen() {
 }
 
 
+// add event listener to the page and display key if its a number or .
+document.addEventListener('keydown', (e) => {
+    const numbers = '0123456789.'
+    if (numbers.includes(e.key)) {
+        if (calcScreen.value.includes('.') && e.key === '.') {
+            return;
+        }
+
+        if (calcScreen.value === '' && e.key === '.') {
+            calcScreen.value = `0`;
+        }
+
+        calcScreen.value += e.key;
+    }
+
+    const operators = '+-*%';
+    if(operators.includes(e.key)) {
+        
+    }
+});
+
+
 function numKeyPress() {
     // get the button pressed
     key = this;
@@ -61,7 +83,6 @@ function numKeyPress() {
         return;
     }
     calcScreen.value += key.textContent;
-    console.log(key);
 }
 
 

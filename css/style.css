@@ -10,18 +10,27 @@ h1 {
     visibility: hidden;
 }
 
+.screen-container {
+    border-radius: 25px;
+    padding: 2px;
+    background-color: green;
+    margin-bottom: 10px;
+}
+.screen-container input {
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    color: white;
+}
+
 .calc-screen {
     /* height: 5em; */
-    margin-bottom: 10px;
-    width: 100%;
     font-size: 2.5rem;
-    padding: 10px 15px;
+    padding: 5px 10px;
     text-align: right;
     border: none;
 }
 
 .calc-mini-screen {
-    width: 100%;
     font-size: 1.5rem;
     padding: 5px 8px;
     text-align: right;
@@ -45,6 +54,16 @@ h1 {
     justify-content: space-evenly;
     flex-direction: column;
     gap: 10px;
+}
+
+.calc-key {
+    border: none;
+    border-radius: 20px;
+}
+.calc-key:hover {
+    filter: opacity(.8);
+    color: rgb(205, 0, 0);
+    transform: translateY(-2px)
 }
 
 .calc-keys div, .key-rows button {
@@ -71,4 +90,15 @@ h1 {
 .operator-keys {
     display: flex;
     flex-direction: column;
+}
+
+.operator-key {
+    background-color: rgb(39, 39, 39);
+    color: white;
+}
+
+.backspace {
+    background-color: rgb(255, 126, 126);
+    color: white;
+    
 }

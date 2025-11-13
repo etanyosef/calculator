@@ -14,15 +14,17 @@
         </header>
 
         <main>
-            <input type="text" class="calc-mini-screen" disabled>
-            <input type="text" class="calc-screen" disabled>
+            <div class="screen-container">                
+                <input type="text" class="calc-mini-screen" disabled>
+                <input type="text" class="calc-screen" disabled>
+            </div>
 
             <div class="calc-keys">
                 <div class="key-rows">
-                    <button class="hidden"></button>
-                    <button class="clear-all">C</button>
-                    <button class="clear-entry">CE</button>
-                    <button class="backspace">&#8592;</button>
+                    <button class="hidden calc-key"></button>
+                    <button class="clear-all calc-key">C</button>
+                    <button class="clear-entry calc-key">CE</button>
+                    <button class="backspace calc-key">&#8592;</button>
                 </div>
                 <div class="key-rows">
                     <button class="num-key calc-key">7</button>

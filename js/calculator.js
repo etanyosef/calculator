@@ -54,7 +54,48 @@ function erase() {
 }
 
 
-// add event listener to the page and display key if its a number or .
+function getOperator(key) {
+     // do nothing if both screens are empty while clicking the operator
+    if (calcScreen.value === '' && calcMiniScreen.value === '') {
+        // return operator = '';
+        return;
+    }
+
+    // if the user already input the first number and operator then click the operator/other operator again
+    // update the mini screen with the new operator
+    if ( !(calcMiniScreen.value === '') && !(operator === '') && calcScreen.value === '' ) {
+        operator = key.textContent;
+        calcMiniScreen.value = `${num1} ${operator}`;
+        return;
+    }
+    
+    if ( !(num1 === 0) && (num2 === 0) && !(operator === '') && !(calcScreen.value === '') ) {
+        // assign the main screen value to num2
+        num2 = calcScreen.value;
+        // calculate the result
+        let result = operate(parseFloat(num1), parseFloat(num2), operator);
+        result = Math.round(result * 100) / 100; // round result to 2 decimal place
+        num1 = result;
+        // clear the num2
+        num2 = 0;
+        // assign the new operator
+        operator = key;
+        // display the result and new operator
+        calcMiniScreen.value = `${result} ${operator}`;
+        // clear the main screen
+        calcScreen.value = '';
+    } else {
+        // assign main screen value to num1 when the top mini screen is empty
+        num1 = calcScreen.value;
+        // clear the main screen
+        calcScreen.value = '';
+        operator = key;
+        calcMiniScreen.value = `${num1} ${operator}`;
+    } 
+}
+
+
+// add event listener to the page on keydown
 document.addEventListener('keydown', (e) => {
     const numbers = '0123456789.'
     if (numbers.includes(e.key)) {
@@ -63,12 +104,15 @@ document.addEventListener('keydown', (e) => {
 
     const operators = '+-*%';
     if(operators.includes(e.key)) {
-
+        getOperator(e.key);
     }
 
     if(e.key === 'Backspace') {
         erase();
     }
+
+    console.log(e.key);
+
 });
 
 
@@ -117,46 +161,7 @@ numKey.forEach( (key) => {
 let operatorKey = document.querySelectorAll('.operator-key');
 operatorKey.forEach( (key) => {
     key.addEventListener('click', () => {
-
-        // do nothing if both screens are empty while clicking the operator
-        if (calcScreen.value === '' && calcMiniScreen.value === '') {
-            // return operator = '';
-            return;
-        }
-
-        // if the user already input the first number and operator then click the operator/other operator again
-        // update the mini screen with the new operator
-        if ( !(calcMiniScreen.value === '') && !(operator === '') && calcScreen.value === '' ) {
-            operator = key.textContent;
-            calcMiniScreen.value = `${num1} ${operator}`;
-            return;
-        }
-        
-        if ( !(num1 === 0) && (num2 === 0) && !(operator === '') && !(calcScreen.value === '') ) {
-            // assign the main screen value to num2
-            num2 = calcScreen.value;
-
-            // calculate the result
-            let result = operate(parseFloat(num1), parseFloat(num2), operator);
-            result = Math.round(result * 100) / 100; // round result to 2 decimal place
-            num1 = result;
-            // clear the num2
-            num2 = 0;
-            // assign the new operator
-            operator = key.textContent;
-            // display the result and new operator
-            calcMiniScreen.value = `${result} ${operator}`;
-            // clear the main screen
-            calcScreen.value = '';
-        } else {
-            // assign main screen value to num1 when the top mini screen is empty
-            num1 = calcScreen.value;
-            // clear the main screen
-            calcScreen.value = '';
-            operator = key.textContent;
-            calcMiniScreen.value = `${num1} ${operator}`;
-        }  
-
+        getOperator(key);
     });
 });
 

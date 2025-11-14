@@ -95,6 +95,37 @@ function getOperator(key) {
 }
 
 
+function calculateTotal() {
+    // do nothing if user click equals without 2nd number
+    if ( !(calcScreen.value === '') && !(calcMiniScreen.value === '') ) {
+        // assign main screen to num2
+        num2 = calcScreen.value;
+
+        if (num1 === '0' && num2 === '0' && operator === '%') {
+            operator = '';
+            num1 = 0;
+            num2 = 0;
+            return calcScreen.value = 'Error';
+        } else if ( operator === '%' && num2 === '0' ) {
+            operator = '';
+            num1 = 0;
+            num2 = 0;
+            return calcScreen.value = "Can't divide by 0";
+        }
+
+        let result = operate(parseFloat(num1), parseFloat(num2), operator);
+
+        result = Math.round(result * 100) / 100; // round it to 2 decimal places
+        
+        calcScreen.value = result;
+        calcMiniScreen.value = `${num1} ${operator} ${num2} = `;
+        num1 = result;
+        num2 = 0;
+        operator = '';
+    } 
+}
+
+
 // add event listener to the page on keydown
 document.addEventListener('keydown', (e) => {
     const numbers = '0123456789.'
@@ -107,11 +138,13 @@ document.addEventListener('keydown', (e) => {
         getOperator(e.key);
     }
 
+    if(e.key === '=' || e.key === 'Enter') {
+        calculateTotal();
+    }
+
     if(e.key === 'Backspace') {
         erase();
     }
-
-    console.log(e.key);
 
 });
 
@@ -167,34 +200,6 @@ operatorKey.forEach( (key) => {
 
 let equalsKey = document.querySelector('.equals-key');
 equalsKey.addEventListener('click', () => {
-
-    // do nothing if user click equals without 2nd number
-    if ( !(calcScreen.value === '') && !(calcMiniScreen.value === '') ) {
-        // assign main screen to num2
-        num2 = calcScreen.value;
-
-        if (num1 === '0' && num2 === '0' && operator === '%') {
-            operator = '';
-            num1 = 0;
-            num2 = 0;
-            return calcScreen.value = 'Error';
-        } else if ( operator === '%' && num2 === '0' ) {
-            operator = '';
-            num1 = 0;
-            num2 = 0;
-            return calcScreen.value = "Can't divide by 0";
-        }
-
-        let result = operate(parseFloat(num1), parseFloat(num2), operator);
-
-        result = Math.round(result * 100) / 100; // round it to 2 decimal places
-        
-        calcScreen.value = result;
-        calcMiniScreen.value = `${num1} ${operator} ${num2} = `;
-        num1 = result;
-        num2 = 0;
-        operator = '';
-    } 
-
+    calculateTotal();
 });
 

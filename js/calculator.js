@@ -187,14 +187,14 @@ clearEntry.addEventListener('click', () => {
 let numKey = document.querySelectorAll('.num-key');
 numKey.forEach( (key) => {
     key.addEventListener('click', () => {
-        numKeyPress(key.textContent)
+        numKeyPress(key.textContent);
     });
 });
 
 let operatorKey = document.querySelectorAll('.operator-key');
 operatorKey.forEach( (key) => {
     key.addEventListener('click', () => {
-        getOperator(key);
+        getOperator(key.textContent);
     });
 });
 
